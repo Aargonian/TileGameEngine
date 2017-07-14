@@ -1,0 +1,121 @@
+             Design Document for Nytework Tile Engine Version 0.1.0
+
+This document describes the theoretical design of the Nytework Tile Engine,
+Version 0.1.0. This Document was initially written by Aaron Helton, on July
+10th, 2017. 
+
+The Nytework Tile Engine is designed primarily for four main component pieces.
+The first two pieces describe the two different, physical pieces of software.
+These are the Editor, and the Interpreter. The other two pieces describe the
+Engine Implementation, and are colloquially known as the Upper Engine (UE) and
+the Lower Engine (LE). 
+
+Physical Softare
+
+    The Nytework Tile Engine has two main pieces of software. The first is the
+Editor, which is responsible for creating and working with elements of the Upper
+Engine, hereon referred to as the UE.
+
+                                     Editor
+        The Editor is what allows potential RPG Game Creators to interface with
+    the Nytework Tile Engine's Upper Layer, where much of the game-specific 
+    logic is designed, implemented, and tested. The Editor allows Game 
+    Developers and Designers alike to collaborate on Games, which are 
+    represented in a file format known simply as the NTE format, which is the 
+    format in which individual are distributed and run. This format is described
+    later in the Design Document. 
+
+        The Editor is different from the Interpreter, in that, individual games
+    cannot be "run" from the editor, and the editor does not implement the logic
+    necessary for the game to actually interface with the host operating system.
+    Instead, the editor is primarily focused on the more abstract part of creating
+    the actual game, and as such provides tools, utilities, and functionality
+    related specifically to designing, creating, debugging, and releasing these
+    games. The Editor does, however, provide the capability to execute the
+    interpreter with the WIP Game, so that functionality is not lost. 
+
+    The Editor UI consists of a few, relatively simple elements. The center of
+    the Editor is always dominated by the whatever TileMap is currently being
+    worked on. Everything else, however, is configurable. Other elements of the
+    editor are presented in "docks", which can be freely moved about, removed,
+    expanded or shrunk, or added. These docks each provides various utilities
+    for editing portions of the TileMap, the Tiles themselves, the Quests
+    subsystem, the Actor Subsystem, or any other configurable portion of the 
+    Upper Engine.
+
+
+                                The Lower Engine
+    The Lower Engine is primarily implemented in the Interperter (See:
+    Interperter), and is focused primarly on communicating with the host system.
+    It is the implementation of the various subsystems that the Upper Engine may
+    utilize, such at the Actor Subsystem, Tile Subsystem, and the Quest
+    Subsystem. Much of the functionality is focused on providing a basis
+    specifically for RPG games. 
+
+    The Lower Engine is responsible for the providing the environment,
+    libraries, tools, and any other utilities needed for the execution of Upper
+    Engine scripts. The Lower Engine directly interfaces with the host system to
+    create all the graphics necessary to render scenes as specified by the Upper
+    Engine. 
+
+    The Lower Engine also managed some higher-level functionality that can't be
+    easily accomplished by the UE, such as swapping out the current map,
+    scrolling the screen, etc.
+
+    +--------------------------------------------------------------------------+
+    |                               Lower Engine                               |
+    +--------------------------------------------------------------------------+
+    |                              Quest Subsystem                             |
+    +--------------------------------------------------------------------------+
+    |                        Map Subsystem                         |           |
+    +------------------------------+-------------------------------+           |
+    |               Actor Subsystem | Tile Subsystem               | Networking|
+    +--------------------------------------------------------------+           |
+    |File IO | Image Manipulation | Configuration | Error Handling |           |
+    +--------------------------------------------------------------------------+
+    Fig 1.
+
+
+                            The Interpreter
+    The Interpreter is the implementation of the Lower Engine, and is the piece
+    of software used to execute NTE games from .NTE files. It does this by first
+    indexing the NTE file to generate a Virtual File System that can be used by
+    the game for IO Purposes. Once the resources have been indexed, 
+
+
+
+
+NTE File Spec:
+    NTE is a PKZIP file format that contains the following standard entries:
+
+        Main.yaml ->    Describes various global properties about the game, such
+                        as its name, version, creators/credits, and what to do 
+                        at game startup based on various boolean entries. 
+
+        Contents.yaml ->    Contains a generated list of game resources, which
+                            is used by the interpreter to build an index for 
+                            the game's VFS. 
+
+        Maps.yaml   -> Contains a list of the maps, providing their UUID and 
+
+
+
+Interpreter Process:
+
+    Startup
+    Read and Unzip .NTE file.
+    Read Main.yaml and set various global properties
+    Read Contents.yaml and create a VFS Index
+
+    If Main.yaml specified a Splash Screen:
+        Load Resources/Splash.png and display as specified size.
+    If Main.yaml specified to show Splash Progress:
+        Display progress of loading according to settings in Main.yaml
+        
+    Read Maps.yaml and generate Map Index
+    Read Actors.yaml and generate Actor Index
+    Read Quests.yaml and generate Quest Index
+    Read Scripts.yaml and generate a Script Index
+
+    Once all indexes have been generated, load the Title Screen. 
+
