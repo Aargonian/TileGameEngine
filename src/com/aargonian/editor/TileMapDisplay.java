@@ -1,8 +1,8 @@
 package com.aargonian.editor;
 
-import aargonian.tile.TileImpl;
-import aargonian.tile.TileMap;
-import aargonian.util.Pair;
+import com.aargonian.tile.TileImpl;
+import com.aargonian.tile.TileMap;
+import com.aargonian.util.Pair;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,15 +46,15 @@ public class TileMapDisplay extends JComponent
         this.tileMap = map;
     }
     
+    public List<Pair<Integer, Integer>> getSelectedTiles()
+    {
+        return this.selectedTiles;
+    }
+    
     public void setSelectedTiles(List<Pair<Integer, Integer>> tiles)
     {
         this.selectedTiles = tiles;
         this.repaint();
-    }
-    
-    public List<Pair<Integer, Integer>> getSelectedTiles()
-    {
-        return this.selectedTiles;
     }
     
     public EditorTool getCurrentActiveTool()
@@ -125,7 +125,7 @@ public class TileMapDisplay extends JComponent
             }
         }
     }
-
+    
     public static final class OptionsBuilder
     {
         private int tileWidth = 32;

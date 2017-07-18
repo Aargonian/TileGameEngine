@@ -1,6 +1,6 @@
 package com.aargonian.editor;
 
-import aargonian.tile.TileImpl;
+import com.aargonian.tile.TileImpl;
 
 import java.awt.event.MouseEvent;
 

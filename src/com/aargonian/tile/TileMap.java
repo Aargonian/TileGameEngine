@@ -1,4 +1,4 @@
-package aargonian.tile;
+package com.aargonian.tile;
 
 import java.util.ArrayList;
 

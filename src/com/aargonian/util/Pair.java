@@ -1,4 +1,4 @@
-package aargonian.util;
+package com.aargonian.util;
 
 /**
  * Created by aargonian on 7/17/17.

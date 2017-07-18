@@ -1,7 +1,7 @@
 package com.aargonian.editor;
 
-import aargonian.tile.TileImpl;
-import aargonian.tile.TileMap;
+import com.aargonian.tile.TileImpl;
+import com.aargonian.tile.TileMap;
 
 import javax.swing.*;
 import java.awt.*;
