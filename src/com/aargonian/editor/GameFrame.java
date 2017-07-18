@@ -1,13 +1,10 @@
 package com.aargonian.editor;
 
-import com.aargonian.com.aargonian.tile.TileImpl;
-import com.aargonian.com.aargonian.tile.TileMap;
+import aargonian.tile.TileImpl;
+import aargonian.tile.TileMap;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by aargonian on 7/8/17.

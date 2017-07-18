@@ -1,10 +1,8 @@
 package com.aargonian.editor;
 
-import com.aargonian.com.aargonian.tile.TileImpl;
-import com.aargonian.com.aargonian.util.Pair;
+import aargonian.tile.TileImpl;
 
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 
 /**
  * Created by aargonian on 7/16/17.
