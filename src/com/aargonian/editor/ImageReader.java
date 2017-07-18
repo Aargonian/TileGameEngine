@@ -12,12 +12,6 @@ public class ImageReader
 {
     public static final BufferedImage readImage(String imagePath)
     {
-        try {
-            BufferedImage img = ImageIO.read(new File(imagePath));
-            return img;
-        } catch(IOException ex) {
-            System.err.println("Exception Occurred: " + ex);
-        }
-        return null;
+        return ResourceLoader.loadImage(imagePath);
     }
 }
