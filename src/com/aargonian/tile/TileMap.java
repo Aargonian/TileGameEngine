@@ -1,5 +1,7 @@
 package com.aargonian.tile;
 
+import com.aargonian.resource.Resource;
+
 import java.util.ArrayList;
 
 /**
@@ -90,7 +92,7 @@ public class TileMap
         setTileImplementation(tile, newImpl);
     }
     
-    public Object getTileResourceAt(String resource, int x, int y)
+    public Resource getTileResourceAt(String resource, int x, int y)
     {
         if(!inBounds(x, y))
         {
@@ -99,7 +101,7 @@ public class TileMap
         return tiles[(y * columns) + x].getTileImplementation().getResource(resource);
     }
     
-    public void setTileResourceAt(String resourceKey, Object resource, int x, int y)
+    public void setTileResourceAt(String resourceKey, Resource resource, int x, int y)
     {
         if(!inBounds(x, y))
         {

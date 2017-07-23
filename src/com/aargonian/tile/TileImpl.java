@@ -1,5 +1,6 @@
 package com.aargonian.tile;
 
+import com.aargonian.resource.Resource;
 import org.pcollections.HashPMap;
 import org.pcollections.HashTreePMap;
 
@@ -19,10 +20,10 @@ public class TileImpl
     public static final String VALUE_FALSE = "False";
     
     private final HashPMap<String, String> properties;
-    private final HashPMap<String, Object> resources;
+    private final HashPMap<String, Resource> resources;
     private int hash = 0;
     
-    public TileImpl(Map<String, String> startingProperties, Map<String, Object> startingResources)
+    public TileImpl(Map<String, String> startingProperties, Map<String, Resource> startingResources)
     {
         if(startingProperties != null && startingProperties.size() > 0)
         {
@@ -43,7 +44,7 @@ public class TileImpl
         }
     }
     
-    private TileImpl(HashPMap<String, String> implProperties, HashPMap<String, Object> implResources)
+    private TileImpl(HashPMap<String, String> implProperties, HashPMap<String, Resource> implResources)
     {
         this.properties = implProperties;
         this.resources = implResources;
@@ -111,11 +112,7 @@ public class TileImpl
     
     public boolean hasProperty(String property)
     {
-        if(properties == null)
-        {
-            return false;
-        }
-        return properties.containsKey(property) && properties.get(property) != null;
+        return properties != null && properties.containsKey(property) && properties.get(property) != null;
     }
     
     public TileImpl removeResource(String resource)
@@ -127,7 +124,7 @@ public class TileImpl
         return new TileImpl(properties, resources.minus(resource));
     }
     
-    public Object getResource(String resource)
+    public Resource getResource(String resource)
     {
         if(resources == null)
         {
@@ -136,7 +133,7 @@ public class TileImpl
         return resources.get(resource);
     }
     
-    public TileImpl setResource(String resourceKey, Object resource)
+    public TileImpl setResource(String resourceKey, Resource resource)
     {
         if(resources == null)
         {
@@ -147,11 +144,7 @@ public class TileImpl
     
     public boolean hasResource(String resourceKey)
     {
-        if(resources == null)
-        {
-            return false;
-        }
-        return resources.containsKey(resourceKey) && resources.get(resourceKey) != null;
+        return resources != null && resources.containsKey(resourceKey) && resources.get(resourceKey) != null;
     }
     
 }

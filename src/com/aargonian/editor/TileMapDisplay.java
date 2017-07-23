@@ -81,7 +81,6 @@ public class TileMapDisplay extends JComponent
     @Override
     public void paintComponent(Graphics g)
     {
-        System.err.println("DOUBLE CHECKING IMPLS: " + tileMap.getTileImplementations().size());
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(options.borderColor());
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());

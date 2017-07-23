@@ -1,9 +1,12 @@
 package com.aargonian.editor;
 
+import com.aargonian.resource.ImageResource;
+import com.aargonian.resource.ResourceLoader;
 import com.aargonian.tile.TileMap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by aargonian on 7/8/17.
@@ -49,25 +52,40 @@ public class GameFrame
         throw new UnsupportedOperationException("Not Supported Yet.");
     }
     
+    private static final void createTools(TileMapDisplay tileMapDisplay, TilesetDisplay tilesetDisplay)
+    {
+        PencilTool pencil = new PencilTool(tileMapDisplay, tilesetDisplay);
+        tileMapDisplay.setCurrentActiveTool(pencil);
+    }
+    
     public static final void setupUI()
     {
         JFrame frame = setupFrame();
     
         TileMap map = new TileMap(10, 10);
     
+        //Create TileMap Display
         TileMapDisplay.OptionsBuilder displayOptions = new TileMapDisplay.OptionsBuilder();
         displayOptions = displayOptions.tileSize(32, 32).displaySize(640, 480).borderColor(Color.black);
         TileMapDisplay currentTileMapDisplay = new TileMapDisplay(displayOptions);
-        
         currentTileMapDisplay.setCurrentTileMap(map);
         currentTileMapDisplay.setCurrentActiveTool(new TileSelectTool(currentTileMapDisplay));
-        
-        System.out.println("TILE MAP DISPLAY WIDTH: " + currentTileMapDisplay.getPreferredSize().getWidth());
-        System.out.println("TILE MAP DISPLAY HEIGHT: " + currentTileMapDisplay.getPreferredSize().getHeight());
-    
-        frame.add(currentTileMapDisplay);
-        
         frame.add(BorderLayout.CENTER, currentTileMapDisplay);
+    
+        //Create TilesetDisplay
+        ArrayList<ImageResource> images = new ArrayList<>();
+        images.add(ResourceLoader.loadImage("res/Water.png"));
+        images.add(ResourceLoader.loadImage("res/Grass.png"));
+        TilesetDisplay tileDisplay = new TilesetDisplay(32, images);
+        frame.add(BorderLayout.WEST, tileDisplay);
+    
+        //CREATE ALL TOOLS with their necessary connections
+        createTools(currentTileMapDisplay, tileDisplay);
+    
+        //Create TileInfoDisplay
+    
+        //Set the Tile Pencil Tool as the Current Active Tool
+        
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
