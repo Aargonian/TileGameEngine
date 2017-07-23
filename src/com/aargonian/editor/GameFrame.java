@@ -1,6 +1,5 @@
 package com.aargonian.editor;
 
-import com.aargonian.tile.TileImpl;
 import com.aargonian.tile.TileMap;
 
 import javax.swing.*;
@@ -53,15 +52,11 @@ public class GameFrame
     public static final void setupUI()
     {
         JFrame frame = setupFrame();
-
+    
         TileMap map = new TileMap(10, 10);
-        map.setTileResourceAt(TileImpl.PROPERTY_IMG, ImageReader.readImage("res/Water.png"), 2, 2);
-
+    
         TileMapDisplay.OptionsBuilder displayOptions = new TileMapDisplay.OptionsBuilder();
-        displayOptions = displayOptions
-                .tileSize(32, 32)
-                .displaySize(640, 480)
-                .borderColor(Color.black);
+        displayOptions = displayOptions.tileSize(32, 32).displaySize(640, 480).borderColor(Color.black);
         TileMapDisplay currentTileMapDisplay = new TileMapDisplay(displayOptions);
         
         currentTileMapDisplay.setCurrentTileMap(map);
@@ -69,7 +64,7 @@ public class GameFrame
         
         System.out.println("TILE MAP DISPLAY WIDTH: " + currentTileMapDisplay.getPreferredSize().getWidth());
         System.out.println("TILE MAP DISPLAY HEIGHT: " + currentTileMapDisplay.getPreferredSize().getHeight());
-
+    
         frame.add(currentTileMapDisplay);
         
         frame.add(BorderLayout.CENTER, currentTileMapDisplay);

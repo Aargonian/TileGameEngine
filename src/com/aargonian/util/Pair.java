@@ -19,14 +19,14 @@ public class Pair<K, T>
         return this.first;
     }
     
-    public T getSecond()
-    {
-        return this.second;
-    }
-    
     public void setFirst(K first)
     {
         this.first = first;
+    }
+    
+    public T getSecond()
+    {
+        return this.second;
     }
     
     public void setSecond(T second)
