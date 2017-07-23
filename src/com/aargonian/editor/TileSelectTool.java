@@ -24,9 +24,9 @@ public class TileSelectTool extends EditorTool
         int tileX = e.getX() / super.getCurrentDisplay().getOptions().tileWidth();
         int tileY = e.getY() / super.getCurrentDisplay().getOptions().tileHeight();
         //getCurrentDisplay().setSelectedTiles(Arrays.asList(new Pair<Integer, Integer>(tileX, tileY)));
-        getCurrentDisplay().getCurrentTileMap()
-                           .setTileResourceAt(TileImpl.PROPERTY_IMG, new ImageResource("res/Water.png"), tileX, tileY);
-        getCurrentDisplay().repaint();
+        this.getCurrentDisplay().getCurrentTileMap()
+            .setTileResourceAt(TileImpl.PROPERTY_IMG, new ImageResource("res/Water.png"), tileX, tileY);
+        this.getCurrentDisplay().repaint();
     }
     
     @Override
@@ -34,11 +34,11 @@ public class TileSelectTool extends EditorTool
     {
         int tileX = e.getX() / super.getCurrentDisplay().getOptions().tileWidth();
         int tileY = e.getY() / super.getCurrentDisplay().getOptions().tileHeight();
-        
-        if(tileX != currentTileX || tileY != currentTileY)
+    
+        if(tileX != this.currentTileX || tileY != this.currentTileY)
         {
-            currentTileX = tileX;
-            currentTileY = tileY;
+            this.currentTileX = tileX;
+            this.currentTileY = tileY;
         }
     }
 }

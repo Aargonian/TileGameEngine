@@ -52,13 +52,13 @@ public class ImageResource extends Resource
     @Override
     public int hashCode()
     {
-        if(hash == 0 && this.res != null)
+        if(this.hash == 0 && this.res != null)
         {
             int[] data = new int[this.res.getWidth() * this.res.getHeight()];
             this.res.getRGB(0, 0, this.res.getWidth(), this.res.getHeight(), data, 0, 0);
-            hash = Arrays.hashCode(data);
+            this.hash = Arrays.hashCode(data);
         }
-        return hash;
+        return this.hash;
     }
     
     @Override

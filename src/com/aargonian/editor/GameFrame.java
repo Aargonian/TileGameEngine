@@ -13,18 +13,15 @@ import java.util.ArrayList;
  */
 public class GameFrame
 {
-    public static final String PROG_TITLE = "TileEditor 0.1.0";
+    private static final String PROG_TITLE = "TileEditor 0.1.0";
     
     public static void main(String[] args)
     {
-        EventQueue.invokeLater(() ->
-                               {
-                                   GameFrame.setupUI();
-                               });
+        EventQueue.invokeLater(GameFrame::setupUI);
     }
     
     //TODO: Add an Icon Image
-    private static final JFrame setupFrame()
+    private static JFrame setupFrame()
     {
         JFrame frame = new JFrame(PROG_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,18 +44,18 @@ public class GameFrame
      *
      * @return The Tile Pane Component, Fully Constructed
      */
-    private static final JComponent setupTilesPanel()
+    private static JComponent setupTilesPanel()
     {
         throw new UnsupportedOperationException("Not Supported Yet.");
     }
     
-    private static final void createTools(TileMapDisplay tileMapDisplay, TilesetDisplay tilesetDisplay)
+    private static void createTools(TileMapDisplay tileMapDisplay, TilesetDisplay tilesetDisplay)
     {
         PencilTool pencil = new PencilTool(tileMapDisplay, tilesetDisplay);
         tileMapDisplay.setCurrentActiveTool(pencil);
     }
     
-    public static final void setupUI()
+    private static void setupUI()
     {
         JFrame frame = setupFrame();
     

@@ -28,7 +28,7 @@ public class EditableTileSheet
      */
     public EditableTileSheet()
     {
-        tileImages = new ArrayList<Image>();
+        this.tileImages = new ArrayList<>();
     }
     
     public EditableTileSheet(List<Image> tileImages)

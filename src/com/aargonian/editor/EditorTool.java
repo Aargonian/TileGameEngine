@@ -14,7 +14,7 @@ public class EditorTool implements MouseListener, MouseMotionListener, KeyListen
 {
     private final TileMapDisplay display;
     
-    public EditorTool(TileMapDisplay display)
+    protected EditorTool(TileMapDisplay display)
     {
         if(display == null)
         {

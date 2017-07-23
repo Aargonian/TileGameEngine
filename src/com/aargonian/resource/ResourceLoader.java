@@ -13,7 +13,7 @@ public final class ResourceLoader
 {
     private static final Map<String, Resource> resourceCache = new HashMap<>(100);
     
-    public static final ImageResource loadImage(String imagePath)
+    public static ImageResource loadImage(String imagePath)
     {
         if(imagePath == null || imagePath.isEmpty())
         {

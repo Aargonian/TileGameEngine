@@ -31,9 +31,9 @@ public class PencilTool extends EditorTool implements TilesetDisplay.TilesetList
         {
             int tileX = e.getX() / super.getCurrentDisplay().getOptions().tileWidth();
             int tileY = e.getY() / super.getCurrentDisplay().getOptions().tileHeight();
-            getCurrentDisplay().getCurrentTileMap()
-                               .setTileResourceAt(TileImpl.PROPERTY_IMG, currentImage, tileX, tileY);
-            getCurrentDisplay().repaint();
+            this.getCurrentDisplay().getCurrentTileMap()
+                .setTileResourceAt(TileImpl.PROPERTY_IMG, this.currentImage, tileX, tileY);
+            this.getCurrentDisplay().repaint();
         }
     }
 }

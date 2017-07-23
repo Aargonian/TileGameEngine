@@ -57,94 +57,93 @@ public class TileImpl
         {
             return true;
         }
-        if(o == null || getClass() != o.getClass())
+        if(o == null || this.getClass() != o.getClass())
         {
             return false;
         }
         
         TileImpl tile = (TileImpl) o;
-        
-        if(properties != null ? !properties.equals(tile.properties) : tile.properties != null)
-        {
-            return false;
-        }
-        return resources != null ? resources.equals(tile.resources) : tile.resources == null;
+    
+        return (this.properties != null ? this.properties.equals(tile.properties) : tile.properties == null) &&
+               (this.resources != null ? this.resources.equals(tile.resources) : tile.resources == null);
     }
     
     @Override
     public int hashCode()
     {
-        if(hash == 0)
+        if(this.hash == 0)
         {
-            int result = properties != null ? properties.hashCode() : 0;
-            result = 31 * result + (resources != null ? resources.hashCode() : 0);
-            hash = result;
+            int result = this.properties != null ? this.properties.hashCode() : 0;
+            result = 31 * result + (this.resources != null ? this.resources.hashCode() : 0);
+            this.hash = result;
         }
-        return hash;
+        return this.hash;
     }
     
     public TileImpl removeProperty(String property)
     {
-        if(properties == null)
+        if(this.properties == null)
         {
             return this;
         }
-        return new TileImpl(properties.minus(property), resources);
+        return new TileImpl(this.properties.minus(property), this.resources);
     }
     
     public String getProperty(String property)
     {
-        if(properties == null)
+        if(this.properties == null)
         {
             return null;
         }
-        return properties.get(property);
+        return this.properties.get(property);
     }
     
     public TileImpl setProperty(String property, String value)
     {
-        if(properties == null)
+        if(this.properties == null)
         {
-            return new TileImpl(HashTreePMap.singleton(property, value), resources);
+            return new TileImpl(HashTreePMap.singleton(property, value), this.resources);
         }
-        return new TileImpl(properties.plus(property, value), resources);
+        return new TileImpl(this.properties.plus(property, value), this.resources);
     }
     
     public boolean hasProperty(String property)
     {
-        return properties != null && properties.containsKey(property) && properties.get(property) != null;
+        return this.properties != null && this.properties.containsKey(property) &&
+               this.properties.get(property) != null;
     }
     
     public TileImpl removeResource(String resource)
     {
-        if(resources == null)
+        if(this.resources == null)
         {
             return this;
         }
-        return new TileImpl(properties, resources.minus(resource));
+        return new TileImpl(this.properties, this.resources.minus(resource));
     }
     
     public Resource getResource(String resource)
     {
-        if(resources == null)
+        if(this.resources == null)
         {
             return null;
         }
-        return resources.get(resource);
+        return this.resources.get(resource);
     }
     
     public TileImpl setResource(String resourceKey, Resource resource)
     {
-        if(resources == null)
+        if(this.resources == null)
         {
-            return new TileImpl(properties, HashTreePMap.singleton(resourceKey, resource));
+            return new TileImpl(this.properties, HashTreePMap.singleton(resourceKey, resource));
         }
-        return new TileImpl(properties, resources.plus(resourceKey, resource));
+        return new TileImpl(this.properties, this.resources.plus(resourceKey, resource));
     }
     
     public boolean hasResource(String resourceKey)
     {
-        return resources != null && resources.containsKey(resourceKey) && resources.get(resourceKey) != null;
+        return this.resources != null && this.resources.containsKey(resourceKey) &&
+               this.resources.get(resourceKey) != null;
     }
     
 }

@@ -34,7 +34,7 @@ public class TileMapDisplay extends JComponent
     
     public OptionsBuilder getOptions()
     {
-        return options;
+        return this.options;
     }
     
     public TileMap getCurrentTileMap()
@@ -67,9 +67,9 @@ public class TileMapDisplay extends JComponent
     {
         if(this.currentActiveTool != null)
         {
-            this.removeMouseListener(currentActiveTool);
-            this.removeMouseMotionListener(currentActiveTool);
-            this.removeKeyListener(currentActiveTool);
+            this.removeMouseListener(this.currentActiveTool);
+            this.removeMouseMotionListener(this.currentActiveTool);
+            this.removeKeyListener(this.currentActiveTool);
         }
         
         this.currentActiveTool = tool;
@@ -82,25 +82,25 @@ public class TileMapDisplay extends JComponent
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(options.borderColor());
+        g2.setColor(this.options.borderColor());
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());
-        for(int x = 0; x < tileMap.getColumns(); x++)
+        for(int x = 0; x < this.tileMap.getColumns(); x++)
         {
-            for(int y = 0; y < tileMap.getRows(); y++)
+            for(int y = 0; y < this.tileMap.getRows(); y++)
             {
-                final int tileXLoc = x * options.tileWidth();
-                final int tileYLoc = y * options.tileHeight();
+                final int tileXLoc = x * this.options.tileWidth();
+                final int tileYLoc = y * this.options.tileHeight();
     
-                ImageResource imgRes = (ImageResource) tileMap.getTileResourceAt(TileImpl.PROPERTY_IMG, x, y);
+                ImageResource imgRes = (ImageResource) this.tileMap.getTileResourceAt(TileImpl.PROPERTY_IMG, x, y);
                 Image img = imgRes == null ? null : imgRes.getImage();
                 if(img != null)
                 {
-                    g2.drawImage(img, tileXLoc, tileYLoc, options.tileWidth(), options.tileHeight(), null);
+                    g2.drawImage(img, tileXLoc, tileYLoc, this.options.tileWidth(), this.options.tileHeight(), null);
                 }
                 else
                 {
-                    final int HALF_WIDTH = options.tileWidth() / 2;
-                    final int HALF_HEIGHT = options.tileHeight() / 2;
+                    final int HALF_WIDTH = this.options.tileWidth() / 2;
+                    final int HALF_HEIGHT = this.options.tileHeight() / 2;
                     
                     g2.setColor(Color.lightGray);
                     g2.fillRect(tileXLoc, tileYLoc, HALF_WIDTH, HALF_HEIGHT);
@@ -110,17 +110,18 @@ public class TileMapDisplay extends JComponent
                     g2.fillRect(tileXLoc, tileYLoc + HALF_HEIGHT, HALF_WIDTH, HALF_HEIGHT);
                     g2.fillRect(tileXLoc + HALF_WIDTH, tileYLoc, HALF_WIDTH, HALF_HEIGHT);
                 }
-                
-                if(selectedTiles != null)
+    
+                if(this.selectedTiles != null)
                 {
-                    for(Pair<Integer, Integer> selectedTile : selectedTiles)
+                    for(Pair<Integer, Integer> selectedTile : this.selectedTiles)
                     {
                         if(selectedTile.getFirst() == x && selectedTile.getSecond() == y)
                         {
                             g2.setColor(Color.YELLOW);
-                            g2.fillRect(tileXLoc, tileYLoc, options.tileWidth(), options.tileHeight());
+                            g2.fillRect(tileXLoc, tileYLoc, this.options.tileWidth(), this.options.tileHeight());
                             g2.setColor(Color.YELLOW.brighter());
-                            g2.fillRect(tileXLoc + 2, tileYLoc + 2, options.tileWidth() - 2, options.tileHeight() - 2);
+                            g2.fillRect(tileXLoc + 2, tileYLoc + 2, this.options.tileWidth() - 2,
+                                        this.options.tileHeight() - 2);
                         }
                     }
                 }
@@ -185,32 +186,32 @@ public class TileMapDisplay extends JComponent
         
         public int tileWidth()
         {
-            return tileWidth;
+            return this.tileWidth;
         }
         
         public int tileHeight()
         {
-            return tileHeight;
+            return this.tileHeight;
         }
         
         public int displayWidth()
         {
-            return displayWidth;
+            return this.displayWidth;
         }
         
         public int displayHeight()
         {
-            return displayHeight;
+            return this.displayHeight;
         }
         
         public Color borderColor()
         {
-            return borderColor;
+            return this.borderColor;
         }
         
         public boolean fulllscreen()
         {
-            return fullscreen;
+            return this.fullscreen;
         }
     }
 }

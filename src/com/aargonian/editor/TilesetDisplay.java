@@ -52,34 +52,34 @@ public final class TilesetDisplay extends JComponent implements MouseListener
     
     private void setCurrentlySelectedImage(int index)
     {
-        currentlySelectedImage = index;
-        if(index < images.size() && index >= 0)
+        this.currentlySelectedImage = index;
+        if(index < this.images.size() && index >= 0)
         {
-            for(TilesetListener listener : listeners)
+            for(TilesetListener listener : this.listeners)
             {
-                listener.imageSelected(images.get(index));
+                listener.imageSelected(this.images.get(index));
             }
         }
     }
     
     public ImageResource getCurrentlySelectedImage(ImageResource res)
     {
-        if(currentlySelectedImage >= 0 && currentlySelectedImage < images.size())
+        if(this.currentlySelectedImage >= 0 && this.currentlySelectedImage < this.images.size())
         {
-            return images.get(currentlySelectedImage);
+            return this.images.get(this.currentlySelectedImage);
         }
         return null;
     }
     
     public void addImageToDisplay(ImageResource img)
     {
-        images.add(img);
+        this.images.add(img);
         this.repaint();
     }
     
     public void removeImageFromDisplay(ImageResource img)
     {
-        images.remove(img);
+        this.images.remove(img);
         this.repaint();
     }
     
@@ -87,13 +87,13 @@ public final class TilesetDisplay extends JComponent implements MouseListener
     @Override
     public void paintComponent(Graphics g)
     {
-        int columns = (int) (getWidth() / tileSize);
+        int columns = this.getWidth() / this.tileSize;
         if(columns != 0) // Avoid divide by zero and simply display nothing.
         {
-            for(int i = 0; i < images.size(); i++)
+            for(int i = 0; i < this.images.size(); i++)
             {
-                g.drawImage(images.get(i).getImage(), (i % columns) * tileSize, ((int) (i / columns)) * tileSize,
-                            tileSize, tileSize, null);
+                g.drawImage(this.images.get(i).getImage(), (i % columns) * this.tileSize, i / columns * this.tileSize,
+                            this.tileSize, this.tileSize, null);
             }
         }
     }
@@ -105,11 +105,11 @@ public final class TilesetDisplay extends JComponent implements MouseListener
         {
             return;
         }
-        
-        int columns = this.getWidth() / tileSize;
-        int tileX = e.getX() / tileSize;
-        int tileY = e.getY() / tileSize;
-        setCurrentlySelectedImage(tileY * columns + tileX);
+    
+        int columns = this.getWidth() / this.tileSize;
+        int tileX = e.getX() / this.tileSize;
+        int tileY = e.getY() / this.tileSize;
+        this.setCurrentlySelectedImage(tileY * columns + tileX);
     }
     
     @Override
@@ -136,8 +136,8 @@ public final class TilesetDisplay extends JComponent implements MouseListener
     
     }
     
-    public static interface TilesetListener
+    public interface TilesetListener
     {
-        public void imageSelected(ImageResource image);
+        void imageSelected(ImageResource image);
     }
 }
