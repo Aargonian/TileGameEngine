@@ -65,13 +65,26 @@ public class TileMap
         tile.setTileImplementation(newImpl);
     }
     
+    private final boolean inBounds(int x, int y)
+    {
+        return !(x < 0 || x >= columns || y < 0 || y >= rows);
+    }
+    
     public String getTilePropertyAt(String property, int x, int y)
     {
+        if(!inBounds(x, y))
+        {
+            return null;
+        }
         return tiles[(y * columns) + x].getTileImplementation().getProperty(property);
     }
     
     public void setTilePropertyAt(String property, String value, int x, int y)
     {
+        if(!inBounds(x, y))
+        {
+            return;
+        }
         Tile tile = tiles[(y * columns) + x];
         TileImpl newImpl = tile.getTileImplementation().setProperty(property, value);
         setTileImplementation(tile, newImpl);
@@ -79,11 +92,19 @@ public class TileMap
     
     public Object getTileResourceAt(String resource, int x, int y)
     {
+        if(!inBounds(x, y))
+        {
+            return null;
+        }
         return tiles[(y * columns) + x].getTileImplementation().getResource(resource);
     }
     
     public void setTileResourceAt(String resourceKey, Object resource, int x, int y)
     {
+        if(!inBounds(x, y))
+        {
+            return;
+        }
         Tile tile = tiles[(y * columns) + x];
         TileImpl newImpl = tile.getTileImplementation().setResource(resourceKey, resource);
         setTileImplementation(tile, newImpl);
