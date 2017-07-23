@@ -1,5 +1,6 @@
 package com.aargonian.editor;
 
+import com.aargonian.resource.ImageResource;
 import com.aargonian.tile.TileImpl;
 import com.aargonian.tile.TileMap;
 import com.aargonian.util.Pair;
@@ -80,6 +81,7 @@ public class TileMapDisplay extends JComponent
     @Override
     public void paintComponent(Graphics g)
     {
+        System.err.println("DOUBLE CHECKING IMPLS: " + tileMap.getTileImplementations().size());
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(options.borderColor());
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -89,8 +91,9 @@ public class TileMapDisplay extends JComponent
             {
                 final int tileXLoc = x * options.tileWidth();
                 final int tileYLoc = y * options.tileHeight();
-                
-                Image img = (Image) tileMap.getTileResourceAt(TileImpl.PROPERTY_IMG, x, y);
+    
+                ImageResource imgRes = (ImageResource) tileMap.getTileResourceAt(TileImpl.PROPERTY_IMG, x, y);
+                Image img = imgRes == null ? null : imgRes.getImage();
                 if(img != null)
                 {
                     g2.drawImage(img, tileXLoc, tileYLoc, options.tileWidth(), options.tileHeight(), null);

@@ -1,5 +1,6 @@
 package com.aargonian.editor;
 
+import com.aargonian.resource.ImageResource;
 import com.aargonian.tile.TileImpl;
 
 import java.awt.event.MouseEvent;
@@ -20,18 +21,19 @@ public class TileSelectTool extends EditorTool
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        int tileX = e.getX()/super.getCurrentDisplay().getOptions().tileWidth();
-        int tileY = e.getY()/super.getCurrentDisplay().getOptions().tileHeight();
+        int tileX = e.getX() / super.getCurrentDisplay().getOptions().tileWidth();
+        int tileY = e.getY() / super.getCurrentDisplay().getOptions().tileHeight();
         //getCurrentDisplay().setSelectedTiles(Arrays.asList(new Pair<Integer, Integer>(tileX, tileY)));
-        getCurrentDisplay().getCurrentTileMap().setTileResourceAt(TileImpl.PROPERTY_IMG, ImageReader.readImage("res/Water.png"), tileX, tileY);
+        getCurrentDisplay().getCurrentTileMap()
+                           .setTileResourceAt(TileImpl.PROPERTY_IMG, new ImageResource("res/Water.png"), tileX, tileY);
         getCurrentDisplay().repaint();
     }
     
     @Override
     public void mouseMoved(MouseEvent e)
     {
-        int tileX = e.getX()/super.getCurrentDisplay().getOptions().tileWidth();
-        int tileY = e.getY()/super.getCurrentDisplay().getOptions().tileHeight();
+        int tileX = e.getX() / super.getCurrentDisplay().getOptions().tileWidth();
+        int tileY = e.getY() / super.getCurrentDisplay().getOptions().tileHeight();
         
         if(tileX != currentTileX || tileY != currentTileY)
         {
