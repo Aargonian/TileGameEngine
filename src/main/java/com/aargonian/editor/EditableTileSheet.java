@@ -14,25 +14,22 @@ import java.util.List;
  * keep each tile instance as a subimage within a larger sheet, unless written out by a TileSheetWriter. Instead,
  * individual tile images can be added or removed from the set at will.
  */
-public class EditableTileSheet
-{
+public class EditableTileSheet {
     /*
      * An EditableTileSheet is the backing model for the TileSheets dock of the editor, and as such implements the
      * Observer
      * pattern for the sake of a cleaner MVC implementation.
      */
     private final List<Image> tileImages;
-    
+
     /**
      * Creates an empty EditableTileSheet.
      */
-    public EditableTileSheet()
-    {
+    public EditableTileSheet() {
         this.tileImages = new ArrayList<>();
     }
-    
-    public EditableTileSheet(List<Image> tileImages)
-    {
+
+    public EditableTileSheet(List<Image> tileImages) {
         this.tileImages = tileImages;
     }
 }
