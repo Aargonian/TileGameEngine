@@ -8,6 +8,7 @@ target/
 bin/
 .idea/
 *.iml
+tile-editor.iml
 
 # User-specific stuff:
 .idea/**/workspace.xml
