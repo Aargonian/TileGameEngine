@@ -2,8 +2,9 @@ package com.aargonian.editor;
 
 import com.aargonian.resource.ImageResource;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -13,17 +14,21 @@ import java.util.ArrayList;
  * <p>
  * This class implements a display for a set of tiles.
  */
-public final class TilesetDisplay extends JComponent implements MouseListener {
-    private final ArrayList<ImageResource> images;
+public final class TilesetDisplay extends JComponent implements MouseListener
+{
+    private final ArrayList<ImageResource>   images;
     private final ArrayList<TilesetListener> listeners;
     private int currentlySelectedImage = 0;
-    private int tileSize = 0;
+    private int tileSize               = 0;
 
-    public TilesetDisplay(int tileSize, ArrayList<ImageResource> tileImages) {
-        if (tileImages == null) {
+    public TilesetDisplay(int tileSize, ArrayList<ImageResource> tileImages)
+    {
+        if(tileImages == null)
+        {
             throw new NullPointerException("Passed Image Set is Null.");
         }
-        if (tileSize < 0) {
+        if(tileSize < 0)
+        {
             throw new IllegalArgumentException("Tilesize Cannot Be Negative!");
         }
         this.images = tileImages;
@@ -36,56 +41,69 @@ public final class TilesetDisplay extends JComponent implements MouseListener {
         this.setPreferredSize(new Dimension(squareSize, squareSize));
     }
 
-    public void addSetListener(TilesetListener listener) {
+    public void addSetListener(TilesetListener listener)
+    {
         this.listeners.add(listener);
     }
 
-    public void removeSetListener(TilesetListener listener) {
+    public void removeSetListener(TilesetListener listener)
+    {
         this.listeners.remove(listener);
     }
 
-    private void setCurrentlySelectedImage(int index) {
+    private void setCurrentlySelectedImage(int index)
+    {
         this.currentlySelectedImage = index;
-        if (index < this.images.size() && index >= 0) {
-            for (TilesetListener listener : this.listeners) {
+        if(index < this.images.size() && index >= 0)
+        {
+            for(TilesetListener listener : this.listeners)
+            {
                 listener.imageSelected(this.images.get(index));
             }
         }
     }
 
-    public ImageResource getCurrentlySelectedImage(ImageResource res) {
-        if (this.currentlySelectedImage >= 0 && this.currentlySelectedImage < this.images.size()) {
+    public ImageResource getCurrentlySelectedImage(ImageResource res)
+    {
+        if(this.currentlySelectedImage >= 0 && this.currentlySelectedImage < this.images.size())
+        {
             return this.images.get(this.currentlySelectedImage);
         }
         return null;
     }
 
-    public void addImageToDisplay(ImageResource img) {
+    public void addImageToDisplay(ImageResource img)
+    {
         this.images.add(img);
         this.repaint();
     }
 
-    public void removeImageFromDisplay(ImageResource img) {
+    public void removeImageFromDisplay(ImageResource img)
+    {
         this.images.remove(img);
         this.repaint();
     }
 
     //Todo: Update this to use a scrollpane and avoid divide by zero.
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g)
+    {
         int columns = this.getWidth() / this.tileSize;
-        if (columns != 0) // Avoid divide by zero and simply display nothing.
+        if(columns != 0) // Avoid divide by zero and simply display nothing.
         {
-            for (int i = 0; i < this.images.size(); i++) {
+            for(int i = 0; i < this.images.size(); i++)
+            {
                 g.drawImage(this.images.get(i).getImage(), (i % columns) * this.tileSize, i / columns * this.tileSize,
-                        this.tileSize, this.tileSize, null);
+                            this.tileSize, this.tileSize, null);
             }
         }
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        if (this.images.size() < 1) {
+    public void mouseClicked(MouseEvent e)
+    {
+        if(this.images.size() < 1)
+        {
             return;
         }
 
@@ -96,26 +114,31 @@ public final class TilesetDisplay extends JComponent implements MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e)
+    {
 
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e)
+    {
 
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e)
+    {
 
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e)
+    {
 
     }
 
-    public interface TilesetListener {
+    public interface TilesetListener
+    {
         void imageSelected(ImageResource image);
     }
 }

@@ -7,20 +7,24 @@ package com.aargonian.resource;
  * or anything else that may be limited or is unique in some fashion. Resources are named entities, and are cacheable
  * and ownable. Resources are required to override the equals() and hashCode() methods, for convenience.
  */
-abstract public class Resource {
-    private final String name;
+abstract public class Resource
+{
+    private final String       name;
     private final ResourceType type;
 
-    protected Resource(String name, ResourceType type) {
+    protected Resource(String name, ResourceType type)
+    {
         this.name = name;
         this.type = type;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
-    public ResourceType getType() {
+    public ResourceType getType()
+    {
         return this.type;
     }
 
@@ -31,7 +35,12 @@ abstract public class Resource {
     abstract public int hashCode();
 
     //We know at compile-time what sort of resources exist, so they are enumerated here for checking
-    public enum ResourceType {
-        FILE, IMAGE, SOUND, SCRIPT, SOCKET
+    public enum ResourceType
+    {
+        FILE,
+        IMAGE,
+        SOUND,
+        SCRIPT,
+        SOCKET
     }
 }

@@ -7,44 +7,55 @@ import java.util.ArrayList;
 /**
  * Created by aargonian on 7/4/17.
  */
-public class TileMap {
+public class TileMap
+{
     private final ArrayList<TileImpl> tilesImplementations;
-    private final Tile[] tiles;
-    private final int rows;
-    private final int columns;
+    private final Tile[]              tiles;
+    private final int                 rows;
+    private final int                 columns;
 
-    public TileMap(int columns, int rows) {
+    public TileMap(int columns, int rows)
+    {
         this.columns = columns;
         this.rows = rows;
         this.tilesImplementations = new ArrayList<>();
         this.tilesImplementations.add(new TileImpl(null, null));
         this.tilesImplementations.get(0).setProperty(TileImpl.PROPERTY_TILETYPE, "EmptyTile");
         this.tiles = new Tile[columns * rows];
-        for (int i = 0; i < this.tiles.length; i++) {
+        for(int i = 0; i < this.tiles.length; i++)
+        {
             this.tiles[i] = new Tile(this.tilesImplementations.get(0));
         }
     }
 
-    public void addTileImplementation(TileImpl impl) {
+    public void addTileImplementation(TileImpl impl)
+    {
         this.tilesImplementations.add(impl);
     }
 
-    public ArrayList<TileImpl> getTileImplementations() {
+    public ArrayList<TileImpl> getTileImplementations()
+    {
         return this.tilesImplementations;
     }
 
-    public int getRows() {
+    public int getRows()
+    {
         return this.rows;
     }
 
-    public int getColumns() {
+    public int getColumns()
+    {
         return this.columns;
     }
 
-    private void setTileImplementation(Tile tile, TileImpl newImpl) {
-        for (TileImpl implementation : this.tilesImplementations) {
-            if (implementation.hashCode() == newImpl.hashCode()) {
-                if (implementation.equals(newImpl)) {
+    private void setTileImplementation(Tile tile, TileImpl newImpl)
+    {
+        for(TileImpl implementation : this.tilesImplementations)
+        {
+            if(implementation.hashCode() == newImpl.hashCode())
+            {
+                if(implementation.equals(newImpl))
+                {
                     tile.setTileImplementation(implementation);
                     return;
                 }
@@ -55,19 +66,24 @@ public class TileMap {
         tile.setTileImplementation(newImpl);
     }
 
-    private boolean inBounds(int x, int y) {
+    private boolean inBounds(int x, int y)
+    {
         return !(x < 0 || x >= this.columns || y < 0 || y >= this.rows);
     }
 
-    public String getTilePropertyAt(String property, int x, int y) {
-        if (this.inBounds(x, y)) {
+    public String getTilePropertyAt(String property, int x, int y)
+    {
+        if(this.inBounds(x, y))
+        {
             return this.tiles[(y * this.columns) + x].getTileImplementation().getProperty(property);
         }
         return null;
     }
 
-    public void setTilePropertyAt(String property, String value, int x, int y) {
-        if (!this.inBounds(x, y)) {
+    public void setTilePropertyAt(String property, String value, int x, int y)
+    {
+        if(!this.inBounds(x, y))
+        {
             return;
         }
         Tile tile = this.tiles[(y * this.columns) + x];
@@ -75,15 +91,19 @@ public class TileMap {
         this.setTileImplementation(tile, newImpl);
     }
 
-    public Resource getTileResourceAt(String resource, int x, int y) {
-        if (!this.inBounds(x, y)) {
+    public Resource getTileResourceAt(String resource, int x, int y)
+    {
+        if(!this.inBounds(x, y))
+        {
             return null;
         }
         return this.tiles[(y * this.columns) + x].getTileImplementation().getResource(resource);
     }
 
-    public void setTileResourceAt(String resourceKey, Resource resource, int x, int y) {
-        if (!this.inBounds(x, y)) {
+    public void setTileResourceAt(String resourceKey, Resource resource, int x, int y)
+    {
+        if(!this.inBounds(x, y))
+        {
             return;
         }
         Tile tile = this.tiles[(y * this.columns) + x];
@@ -91,19 +111,24 @@ public class TileMap {
         this.setTileImplementation(tile, newImpl);
     }
 
-    private final class Tile {
+    private final class Tile
+    {
         private TileImpl implementation;
 
-        private Tile(TileImpl impl) {
+        private Tile(TileImpl impl)
+        {
             this.implementation = impl;
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
+        public boolean equals(Object o)
+        {
+            if(this == o)
+            {
                 return true;
             }
-            if (o == null || this.getClass() != o.getClass()) {
+            if(o == null || this.getClass() != o.getClass())
+            {
                 return false;
             }
 
@@ -113,15 +138,18 @@ public class TileMap {
         }
 
         @Override
-        public int hashCode() {
+        public int hashCode()
+        {
             return this.implementation.hashCode();
         }
 
-        private TileImpl getTileImplementation() {
+        private TileImpl getTileImplementation()
+        {
             return this.implementation;
         }
 
-        private void setTileImplementation(TileImpl impl) {
+        private void setTileImplementation(TileImpl impl)
+        {
             this.implementation = impl;
         }
     }
